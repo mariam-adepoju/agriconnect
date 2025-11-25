@@ -4,6 +4,16 @@ import { Link } from "react-router";
 const ProductCard = ({ product }: { product: Product }) => {
   const [qty, setQty] = useState(1);
 
+  const handleAction = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevents the Link from activating
+    e.stopPropagation(); // Stops the event bubbling
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    handleAction(e);
+    alert(`Added ${qty} ${product.name} to cart!`);
+  };
+
   return (
     <Link to={`productdetails/${product.id}`}>
       <article className="bg-white rounded-xl flex-col flex py-3 px-4 gap-2 overflow-hidden shadow-sm border">
@@ -20,14 +30,19 @@ const ProductCard = ({ product }: { product: Product }) => {
 
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setQty(Math.max(1, qty - 1))}
-              className="border px-2 py-1 rounded"
+              onClick={(e) => {
+                handleAction(e);
+                setQty(Math.max(1, qty - 1));
+              }}
             >
               -
             </button>
             <span className="border px-3 py-1 rounded">{qty}</span>
             <button
-              onClick={() => setQty(qty + 1)}
+              onClick={(e) => {
+                handleAction(e);
+                setQty(qty + 1);
+              }}
               className="border px-2 py-1 rounded"
             >
               +
@@ -35,7 +50,10 @@ const ProductCard = ({ product }: { product: Product }) => {
           </div>
         </div>
 
-        <button className="mt-4 w-full bg-primary text-white py-2 rounded-md">
+        <button
+          onClick={handleAddToCart}
+          className="mt-4 w-full bg-primary text-white py-2 rounded-md"
+        >
           Add to cart
         </button>
       </article>

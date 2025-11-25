@@ -3,6 +3,12 @@ interface Category {
   name: string;
   imageUrl: string;
 }
+interface Seller {
+  id: number;
+  name: string;
+  location: string;
+  avatar: string;
+}
 interface Product {
   id: number;
   name: string;
@@ -12,6 +18,7 @@ interface Product {
   condition: string;
   location: string;
   sellerType: string;
+  seller: Seller;
 }
 interface ActiveFilters {
   produceType: string | null;

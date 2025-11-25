@@ -22,6 +22,7 @@ import fedEx from "../assets/icons/fedEx.png";
 import gig from "../assets/icons/gigicon.png";
 import courier from "../assets/icons/couriericon.png";
 import dhl from "../assets/icons/dhlicon.png";
+import locationMap from "../assets/images/location-map.jpg";
 
 export const assets = {
   avocadoicon,
@@ -48,4 +49,5 @@ export const assets = {
   gig,
   courier,
   dhl,
+  locationMap,
 };

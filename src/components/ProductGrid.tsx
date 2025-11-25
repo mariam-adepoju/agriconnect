@@ -63,7 +63,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products }) => {
             <div className="flex flex-col">
               <h3 className="font-semibold truncate grow-0">{product.name}</h3>
               <p className="text-greeny font-semibold my-1 grow-0">
-                ${product.price.toFixed(2)}
+                #{product.price.toFixed(2)}
               </p>
               <AddToCartButton />
             </div>

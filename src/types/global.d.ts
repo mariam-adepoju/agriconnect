@@ -6,7 +6,17 @@ interface Category {
 interface Product {
   id: number;
   name: string;
+  imageUrl: string;
   categoryId: number;
   price: number;
-  imageUrl: string;
+  condition: string;
+  location: string;
+  sellerType: string;
+}
+interface ActiveFilters {
+  produceType: string | null;
+  condition: string | null;
+  location: string | null;
+  availability: string | null;
+  sellerType: string | null;
 }

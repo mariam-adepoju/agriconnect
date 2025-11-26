@@ -8,6 +8,45 @@ export const categories: Category[] = [
   { id: 5, name: "Fruits", imageUrl: assets.fruits },
   { id: 6, name: "Roots & Tubers", imageUrl: assets.roots },
 ];
+
+export const sellers: Seller[] = [
+  {
+    id: 1,
+    name: "Ogunrunu Ashim",
+    location: "Osun, Nigeria",
+    avatar: "/sellers/ashim.jpg",
+  },
+  {
+    id: 2,
+    name: "Agrip Farm",
+    location: "Lagos, Nigeria",
+    avatar: "/sellers/fatimah.jpg",
+  },
+  {
+    id: 3,
+    name: "Twin Farm",
+    location: "Osun, Nigeria",
+    avatar: "/sellers/chinedu.jpg",
+  },
+  {
+    id: 4,
+    name: "Aisha Yusuf",
+    location: "Lagos, Nigeria",
+    avatar: "/sellers/aisha.jpg",
+  },
+  {
+    id: 5,
+    name: "Kunle Adeyemi",
+    location: "Oyo, Nigeria",
+    avatar: "/sellers/kunle.jpg",
+  },
+  {
+    id: 6,
+    name: "Lade Farm",
+    location: "Oyo, Nigeria",
+    avatar: "/sellers/grace.jpg",
+  },
+];
 export const products: Product[] = [
   // --- Category 1: Protein ---
   {
@@ -16,6 +55,10 @@ export const products: Product[] = [
     categoryId: 1,
     price: 8.99,
     imageUrl: "/products/chicken.jpg",
+    condition: "Fresh",
+    location: "Oyo",
+    sellerType: "Corporate",
+    seller: sellers[5],
   },
   {
     id: 102,
@@ -23,6 +66,10 @@ export const products: Product[] = [
     categoryId: 1,
     price: 12.5,
     imageUrl: "/products/salmon.jpg",
+    condition: "Frozen",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
   {
     id: 103,
@@ -30,6 +77,10 @@ export const products: Product[] = [
     categoryId: 1,
     price: 3.5,
     imageUrl: "/products/tofu.jpg",
+    condition: "Processed",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
   {
     id: 104,
@@ -37,6 +88,10 @@ export const products: Product[] = [
     categoryId: 1,
     price: 2.99,
     imageUrl: "/products/lentils.jpg",
+    condition: "Dried",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
   {
     id: 105,
@@ -44,6 +99,10 @@ export const products: Product[] = [
     categoryId: 1,
     price: 7.25,
     imageUrl: "/products/ground-beef.jpg",
+    condition: "Fresh",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
   {
     id: 106,
@@ -51,6 +110,10 @@ export const products: Product[] = [
     categoryId: 1,
     price: 4.0,
     imageUrl: "/products/eggs.jpg",
+    condition: "Fresh",
+    location: "Osun",
+    sellerType: "Corporate",
+    seller: sellers[2],
   },
 
   // --- Category 2: Vegetables ---
@@ -60,6 +123,10 @@ export const products: Product[] = [
     categoryId: 2,
     price: 1.2,
     imageUrl: "/products/carrot.jpg",
+    condition: "Organic",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
   {
     id: 202,
@@ -67,6 +134,10 @@ export const products: Product[] = [
     categoryId: 2,
     price: 2.5,
     imageUrl: "/products/broccoli.jpg",
+    condition: "Fresh",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
   {
     id: 203,
@@ -74,6 +145,10 @@ export const products: Product[] = [
     categoryId: 2,
     price: 3.0,
     imageUrl: "/products/spinach.jpg",
+    condition: "Fresh",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
   {
     id: 204,
@@ -81,6 +156,10 @@ export const products: Product[] = [
     categoryId: 2,
     price: 4.5,
     imageUrl: "/products/bell-peppers.jpg",
+    condition: "Fresh",
+    location: "Lagos",
+    sellerType: "Individual",
+    seller: sellers[3],
   },
   {
     id: 205,
@@ -88,6 +167,10 @@ export const products: Product[] = [
     categoryId: 2,
     price: 1.75,
     imageUrl: "/products/lettuce.jpg",
+    condition: "Organic",
+    location: "Osun",
+    sellerType: "Corporate",
+    seller: sellers[2],
   },
   {
     id: 206,
@@ -95,6 +178,10 @@ export const products: Product[] = [
     categoryId: 2,
     price: 0.99,
     imageUrl: "/products/zucchini.jpg",
+    condition: "Fresh",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
 
   // --- Category 3: Grains ---
@@ -104,6 +191,10 @@ export const products: Product[] = [
     categoryId: 3,
     price: 5.5,
     imageUrl: "/products/brown-rice.jpg",
+    condition: "Dried",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
   {
     id: 302,
@@ -111,6 +202,10 @@ export const products: Product[] = [
     categoryId: 3,
     price: 3.99,
     imageUrl: "/products/oatmeal.jpg",
+    condition: "Processed",
+    location: "Oyo",
+    sellerType: "Corporate",
+    seller: sellers[5],
   },
   {
     id: 303,
@@ -118,6 +213,10 @@ export const products: Product[] = [
     categoryId: 3,
     price: 6.75,
     imageUrl: "/products/quinoa.jpg",
+    condition: "Dried",
+    location: "Lagos",
+    sellerType: "Individual",
+    seller: sellers[3],
   },
   {
     id: 304,
@@ -125,6 +224,10 @@ export const products: Product[] = [
     categoryId: 3,
     price: 3.2,
     imageUrl: "/products/wheat-bread.jpg",
+    condition: "Processed",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
   {
     id: 305,
@@ -132,6 +235,10 @@ export const products: Product[] = [
     categoryId: 3,
     price: 1.99,
     imageUrl: "/products/pasta.jpg",
+    condition: "Dried",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
   {
     id: 306,
@@ -139,6 +246,10 @@ export const products: Product[] = [
     categoryId: 3,
     price: 2.5,
     imageUrl: "/products/cornmeal.jpg",
+    condition: "Processed",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
 
   // --- Category 4: Nuts ---
@@ -148,6 +259,10 @@ export const products: Product[] = [
     categoryId: 4,
     price: 9.5,
     imageUrl: "/products/almonds.jpg",
+    condition: "Processed",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
   {
     id: 402,
@@ -155,6 +270,10 @@ export const products: Product[] = [
     categoryId: 4,
     price: 10.99,
     imageUrl: "/products/walnuts.jpg",
+    condition: "Dried",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
   {
     id: 403,
@@ -162,6 +281,10 @@ export const products: Product[] = [
     categoryId: 4,
     price: 11.2,
     imageUrl: "/products/cashews.jpg",
+    condition: "Organic",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
   {
     id: 404,
@@ -169,6 +292,10 @@ export const products: Product[] = [
     categoryId: 4,
     price: 4.0,
     imageUrl: "/products/peanut-butter.jpg",
+    condition: "Processed",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
   {
     id: 405,
@@ -176,6 +303,10 @@ export const products: Product[] = [
     categoryId: 4,
     price: 13.5,
     imageUrl: "/products/pistachios.jpg",
+    condition: "Dried",
+    location: "Lagos",
+    sellerType: "Corporate",
+    seller: sellers[1],
   },
   {
     id: 406,
@@ -183,6 +314,10 @@ export const products: Product[] = [
     categoryId: 4,
     price: 10.0,
     imageUrl: "/products/mixed-nuts.jpg",
+    condition: "Processed",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
 
   // --- Category 5: Fruits ---
@@ -192,6 +327,10 @@ export const products: Product[] = [
     categoryId: 5,
     price: 0.5,
     imageUrl: assets.watermelon,
+    condition: "Fresh",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
   {
     id: 502,
@@ -199,6 +338,10 @@ export const products: Product[] = [
     categoryId: 5,
     price: 0.3,
     imageUrl: assets.banana,
+    condition: "Fresh",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
   {
     id: 503,
@@ -206,6 +349,10 @@ export const products: Product[] = [
     categoryId: 5,
     price: 3.75,
     imageUrl: assets.mango,
+    condition: "Organic",
+    location: "Lagos",
+    sellerType: "Individual",
+    seller: sellers[3],
   },
   {
     id: 504,
@@ -213,6 +360,10 @@ export const products: Product[] = [
     categoryId: 5,
     price: 0.75,
     imageUrl: assets.orange,
+    condition: "Fresh",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
   {
     id: 505,
@@ -220,6 +371,10 @@ export const products: Product[] = [
     categoryId: 5,
     price: 4.25,
     imageUrl: assets.pawpaw,
+    condition: "Fresh",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
   {
     id: 506,
@@ -227,6 +382,10 @@ export const products: Product[] = [
     categoryId: 5,
     price: 1.5,
     imageUrl: "/products/avocado.jpg",
+    condition: "Organic",
+    location: "Lagos",
+    sellerType: "Individual",
+    seller: sellers[3],
   },
 
   // --- Category 6: Roots & Tubers ---
@@ -236,6 +395,10 @@ export const products: Product[] = [
     categoryId: 6,
     price: 3.0,
     imageUrl: "/products/sweet-potatoes.jpg",
+    condition: "Fresh",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
   {
     id: 602,
@@ -243,6 +406,10 @@ export const products: Product[] = [
     categoryId: 6,
     price: 2.5,
     imageUrl: "/products/white-potatoes.jpg",
+    condition: "Fresh",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
   {
     id: 603,
@@ -250,6 +417,10 @@ export const products: Product[] = [
     categoryId: 6,
     price: 1.5,
     imageUrl: "/products/ginger.jpg",
+    condition: "Organic",
+    location: "Lagos",
+    sellerType: "Individual",
+    seller: sellers[3],
   },
   {
     id: 604,
@@ -257,6 +428,10 @@ export const products: Product[] = [
     categoryId: 6,
     price: 2.0,
     imageUrl: "/products/onions.jpg",
+    condition: "Dried",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
   {
     id: 605,
@@ -264,6 +439,10 @@ export const products: Product[] = [
     categoryId: 6,
     price: 0.75,
     imageUrl: "/products/garlic.jpg",
+    condition: "Dried",
+    location: "Osun",
+    sellerType: "Individual",
+    seller: sellers[0],
   },
   {
     id: 606,
@@ -271,5 +450,9 @@ export const products: Product[] = [
     categoryId: 6,
     price: 3.5,
     imageUrl: "/products/yams.jpg",
+    condition: "Fresh",
+    location: "Oyo",
+    sellerType: "Individual",
+    seller: sellers[4],
   },
 ];

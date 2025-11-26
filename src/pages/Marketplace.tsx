@@ -57,7 +57,7 @@ const Marketplace = () => {
           setActiveLocation={setActiveLocation}
         />
 
-        <div className="col-span-12 md:col-span-9">
+        <div className="col-span-12 md:col-span-9 order-1 lg:order-2">
           <SearchBar query={query} setQuery={setQuery} />
           <ActiveFilters
             activeCategory={activeCategory}

@@ -1,23 +1,26 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router";
+import { Link, useParams, useNavigate } from "react-router";
 import { products } from "@/lib/mockData";
-import SellerCard from "./SellerCard";
-import QuantityPicker from "./QuantityPicker";
+import SellerCard from "../components/SellerCard";
+import QuantityPicker from "../components/QuantityPicker";
 import { MapPin, Star } from "lucide-react";
 import { toast } from "react-toastify";
+import { useCartStore } from "@/store/useCartStore";
 
 const ProduceDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const addToCart = useCartStore((state) => state.addToCart);
+  const cartItems = useCartStore((state) => state.items);
 
   const product = products.find((p) => p.id === Number(id));
-
-  const [qty, setQty] = useState(1);
-  const [selectedImage, setSelectedImage] = useState<string>("");
+  const [selectedImage, setSelectedImage] = useState<string | null>(
+    product ? product.imageUrl : null
+  );
 
   useEffect(() => {
     if (product) {
       setSelectedImage(product.imageUrl);
-      setQty(1);
     }
   }, [product]);
 
@@ -32,6 +35,7 @@ const ProduceDetail: React.FC = () => {
   const relatedProducts = products
     .filter((p) => p.categoryId === product.categoryId && p.id !== product.id)
     .slice(0, 6);
+  const cartItem = cartItems.find((item) => item.id === product.id);
 
   return (
     <main className="mx-auto pt-25 pb-20 bg-grany px-4 md:px-16 lg:px-24 xl:px-32">
@@ -41,11 +45,13 @@ const ProduceDetail: React.FC = () => {
         <div className="lg:col-span-7 space-y-4">
           {/* Main Image */}
           <div className="bg-white border border-gray-200 rounded-xl p-8 flex items-center justify-center h-auto lg:h-[520px]">
-            <img
-              src={selectedImage}
-              alt={product.name}
-              className="max-h-full max-w-full object-cover drop-shadow-lg"
-            />
+            {selectedImage && (
+              <img
+                src={selectedImage}
+                alt={product.name}
+                className="max-h-full max-w-full object-cover drop-shadow-lg"
+              />
+            )}
           </div>
 
           {/* Thumbnails */}
@@ -84,8 +90,24 @@ const ProduceDetail: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <QuantityPicker value={qty} onChange={setQty} />
-            <button className="bg-secondary hover:bg-secondary/80 text-grany text-xl py-2 px-4 rounded-md shadow-sm transition-colors">
+            {cartItem ? (
+              <QuantityPicker itemId={cartItem.id} />
+            ) : (
+              <QuantityPicker itemId={product.id} />
+            )}
+            <button
+              onClick={() => {
+                addToCart({
+                  id: product.id,
+                  name: product.name,
+                  price: product.price,
+                  imageUrl: product.imageUrl,
+                  qty: 1,
+                });
+                navigate("/cart");
+              }}
+              className="bg-secondary hover:bg-secondary/80 text-grany text-xl py-2 px-4 rounded-md shadow-sm transition-colors"
+            >
               Add to Cart
             </button>
           </div>

@@ -1,10 +1,11 @@
 import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { Button } from "./ui/button";
 import { Menu, ShoppingCart, X } from "lucide-react";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Marketplace", path: "/marketplace" },
@@ -78,6 +79,7 @@ const Navbar = () => {
         {/* Desktop Right */}
         <div className="hidden md:flex items-center gap-4">
           <Button
+            onClick={() => navigate("/cart")}
             variant={"outline"}
             className={cn(
               "rounded-full px-4! py-3 text-base lg:text-lg flex gap-2 text-greeny"
@@ -128,6 +130,7 @@ const Navbar = () => {
           ))}
 
           <Button
+            onClick={() => navigate("/cart")}
             variant={"outline"}
             className="border text-greeny px-4 py-1 text-sm rounded-full cursor-pointer transition-all"
           >

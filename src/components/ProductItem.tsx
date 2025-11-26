@@ -1,17 +1,24 @@
-import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useCartStore } from "@/store/useCartStore";
 
-const ProductCard = ({ product }: { product: Product }) => {
-  const [qty, setQty] = useState(1);
+interface ProductCardProps {
+  product: Product;
+}
 
-  const handleAction = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevents the Link from activating
-    e.stopPropagation(); // Stops the event bubbling
-  };
-
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const navigate = useNavigate();
   const handleAddToCart = (e: React.MouseEvent) => {
-    handleAction(e);
-    alert(`Added ${qty} ${product.name} to cart!`);
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      qty: 1,
+    });
+    navigate("/cart");
   };
 
   return (
@@ -25,29 +32,10 @@ const ProductCard = ({ product }: { product: Product }) => {
 
         <h3 className="text-sm font-semibold">{product.name}</h3>
 
-        <div className="flex justify-between items-center">
-          <span className="font-semibold">₦{product.price}</span>
-
-          <div className="flex items-center gap-2">
-            <button
-              onClick={(e) => {
-                handleAction(e);
-                setQty(Math.max(1, qty - 1));
-              }}
-            >
-              -
-            </button>
-            <span className="border px-3 py-1 rounded">{qty}</span>
-            <button
-              onClick={(e) => {
-                handleAction(e);
-                setQty(qty + 1);
-              }}
-              className="border px-2 py-1 rounded"
-            >
-              +
-            </button>
-          </div>
+        <div className="flex justify-between items-center mt-2">
+          <span className="font-semibold">
+            ₦{product.price.toLocaleString()}
+          </span>
         </div>
 
         <button
@@ -60,4 +48,5 @@ const ProductCard = ({ product }: { product: Product }) => {
     </Link>
   );
 };
+
 export default ProductCard;

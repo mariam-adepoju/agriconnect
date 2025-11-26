@@ -40,7 +40,7 @@ function FilterBar({
   const sellerTypes = ["Corporate", "Individual"];
 
   return (
-    <aside className="col-span-12 md:col-span-3 bg-[linear-gradient(90deg,#2D7C31_1.9%,#9CCC65_100%)] text-white rounded-lg p-6">
+    <aside className="col-span-12 md:col-span-3 bg-[linear-gradient(90deg,#2D7C31_1.9%,#9CCC65_100%)] text-white rounded-lg p-6 order-2 lg:order-1">
       <h2 className="text-xl mb-3">Filter Options</h2>
 
       <FilterSection title="Produce Type">

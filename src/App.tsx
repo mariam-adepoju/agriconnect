@@ -3,8 +3,9 @@ import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Marketplace from "./pages/Marketplace";
-import ProductDetails from "./components/ProductDetails";
+import ProductDetails from "./pages/ProductDetails";
 import { ToastContainer } from "react-toastify";
+import CartPage from "./pages/Cart";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           element={<ProductDetails />}
         />
         <Route path="/productdetails/:id" element={<ProductDetails />} />
+        <Route path="/cart" element={<CartPage />} />
       </Routes>
       <Footer />
     </>

@@ -27,3 +27,26 @@ interface ActiveFilters {
   availability: string | null;
   sellerType: string | null;
 }
+type PaystackResponse = {
+  status?: string;
+  reference?: string;
+};
+type PaymentState = {
+  subtotal: number;
+  deliveryFee: number;
+  tax: number;
+  total: number;
+};
+type CartItem = {
+  id: number;
+  name: string;
+  price: number;
+  imageUrl: string;
+  qty: number;
+};
+type Order = {
+  id: string;
+  items: CartItem[];
+  total: number;
+  date: string;
+};

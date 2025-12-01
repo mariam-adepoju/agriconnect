@@ -52,7 +52,7 @@ function FilterBar({
                 category.id === activeCategory ? null : category.id
               )
             }
-            className={`block w-full px-3 py-1 rounded-full text-left ${
+            className={`block w-full px-3 py-1 rounded-full text-left cursor-pointer ${
               activeCategory === category.id
                 ? "bg-white text-greeny"
                 : "bg-transparent"
@@ -72,7 +72,7 @@ function FilterBar({
                 condition === activeCondition ? null : condition
               )
             }
-            className={`block w-full px-3 py-1 rounded-full text-left ${
+            className={`block w-full cursor-pointer px-3 py-1 rounded-full text-left ${
               activeCondition === condition
                 ? "bg-white text-greeny"
                 : "bg-transparent"
@@ -89,7 +89,7 @@ function FilterBar({
             onClick={() =>
               setActiveLocation(location === activeLocation ? null : location)
             }
-            className={`block w-full px-3 py-1 rounded-full text-left ${
+            className={`block w-full cursor-pointer px-3 py-1 rounded-full text-left ${
               activeLocation === location
                 ? "bg-white text-greeny"
                 : "bg-transparent"
@@ -108,7 +108,7 @@ function FilterBar({
                 sellerType === activeSellerType ? null : sellerType
               )
             }
-            className={`block w-full px-3 py-1 rounded-full text-left ${
+            className={`block w-full cursor-pointer px-3 py-1 rounded-full text-left ${
               activeSellerType === sellerType
                 ? "bg-white text-greeny"
                 : "bg-transparent"

@@ -134,7 +134,7 @@ body {
 }
 .swiper-button-next,
 .swiper-button-prev {
-  @apply text-primary w-8 h-8 rounded-full bg-transparent transition-opacity duration-300;
+  @apply text-white w-8 h-8 rounded-full bg-primary p-2 transition-opacity duration-300;
   top: 50%;
   transform: translateY(-50%);
   opacity: 0.8;

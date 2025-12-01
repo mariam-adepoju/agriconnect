@@ -3,11 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Input } from "@/components/ui/input";
-import { Trash } from "lucide-react";
+import { ArrowLeft, Trash } from "lucide-react";
 import QuantityPicker from "@/components/QuantityPicker";
+import { useNavigate } from "react-router";
 
 const CartPage = () => {
   const { items, removeItem } = useCartStore();
+  const navigate = useNavigate();
 
   const deliveryFee = 8000;
   const tax = 1000;
@@ -15,7 +17,7 @@ const CartPage = () => {
   const subtotal = useCartStore((state) =>
     state.items.reduce((acc, item) => acc + item.price * item.qty, 0)
   );
-
+  const total = deliveryFee + tax + subtotal;
   if (items.length === 0)
     return (
       <div className="min-h-screen flex items-center justify-center text-xl text-gray-500">
@@ -24,8 +26,18 @@ const CartPage = () => {
     );
 
   return (
-    <main className="mx-auto pt-25 pb-20 bg-grany px-4 md:px-16 lg:px-24 xl:px-32">
+    <main className="mx-auto pt-30 pb-20 bg-grany px-4 md:px-16 lg:px-24 xl:px-32">
       <div className="mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <Button
+          variant={"link"}
+          onClick={() => {
+            console.log("Navigating to marketplace");
+            navigate("/marketplace");
+          }}
+          className="absolute top-18 bg-white z-20 rounded-full"
+        >
+          <ArrowLeft />
+        </Button>
         {/* LEFT SIDE - CART ITEMS */}
         <div className="lg:col-span-7 space-y-4">
           {items.map((item) => (
@@ -100,10 +112,22 @@ const CartPage = () => {
 
             <div className="flex justify-between font-semibold mb-4">
               <span>Total amount</span>
-              <span>₦{(subtotal + deliveryFee + tax).toLocaleString()}</span>
+              <span>₦{total.toLocaleString()}</span>
             </div>
 
-            <Button className="bg-secondary hover:bg-secondary/80 text-grany text-xl py-2 px-4 rounded-md shadow-sm transition-colors">
+            <Button
+              onClick={() => {
+                navigate("/payment", {
+                  state: {
+                    subtotal,
+                    deliveryFee,
+                    tax,
+                    total,
+                  },
+                });
+              }}
+              className="bg-secondary hover:bg-secondary/80 text-grany text-xl py-2 px-4 rounded-md shadow-sm transition-colors"
+            >
               Proceed to Checkout
             </Button>
           </Card>

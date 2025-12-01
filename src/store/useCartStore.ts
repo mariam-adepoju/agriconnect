@@ -1,27 +1,22 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type CartItem = {
-  id: number;
-  name: string;
-  price: number;
-  imageUrl: string;
-  qty: number;
-};
-
 interface CartState {
   items: CartItem[];
+  orderHistory: Order[];
   addToCart: (item: CartItem) => void;
   removeItem: (id: number) => void;
   increaseQty: (id: number) => void;
   decreaseQty: (id: number) => void;
   clearCart: () => void;
+  addOrder: (order: Order) => void;
 }
 
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
+      orderHistory: [],
 
       addToCart: (item) => {
         const existing = get().items.find((i) => i.id === item.id);
@@ -54,7 +49,10 @@ export const useCartStore = create<CartState>()(
         }),
 
       clearCart: () => set({ items: [] }),
+      addOrder: (order) =>
+        set({ orderHistory: [...get().orderHistory, order] }),
     }),
+
     { name: "cart-storage" }
   )
 );

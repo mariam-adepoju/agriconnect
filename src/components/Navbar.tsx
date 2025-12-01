@@ -130,7 +130,10 @@ const Navbar = () => {
           ))}
 
           <Button
-            onClick={() => navigate("/cart")}
+            onClick={() => {
+              navigate("/cart");
+              setIsMenuOpen(false);
+            }}
             variant={"outline"}
             className="border text-greeny px-4 py-1 text-sm rounded-full cursor-pointer transition-all"
           >

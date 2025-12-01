@@ -1,4 +1,4 @@
-import { useCartStore, type CartItem } from "@/store/useCartStore";
+import { useCartStore } from "@/store/useCartStore";
 import { Minus, Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 

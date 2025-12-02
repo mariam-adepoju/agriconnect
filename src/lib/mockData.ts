@@ -1,5 +1,66 @@
 import { assets } from "@/assets/asset";
 
+export const articles: Record<BlogCategory, Article[]> = {
+  tech: [
+    {
+      title: "5 Digital Tools Every Nigerian Farmer Should Be Using in 2025",
+      time: "10-15 Minutes read",
+      description:
+        "Digital tools are transforming farming in Nigeria by helping farmers make faster, smarter, and more profitable decisions.",
+      author: "Musa Aliyu",
+      date: "February, 2025",
+      image: assets.digitaltools,
+    },
+    {
+      title: "How Mobile Phones Are Changing the Way Farmers Trade",
+      time: "10-15 Minutes read",
+      description:
+        "Mobile phones have completely transformed how farmers trade by giving them instant access to buyers and market information.",
+      author: "Musa Aliyu",
+      date: "February, 2025",
+      image: assets.smarttrade,
+    },
+  ],
+  business: [
+    {
+      title:
+        "Everything You Need to Know About Sourcing Fresh Tomatoes in Bulk",
+      time: "10-15 Minutes read",
+      description:
+        "Fresh tomatoes are one of the most in-demand produce items, but sourcing them in bulk requires knowing the right seasons and trusted suppliers.",
+      author: "Adewale Adegoke",
+      date: "January, 2025",
+      image: assets.tomatoes,
+    },
+    {
+      title: "How Cooperatives Can Boost Farmer Negotiation Power in Nigeria",
+      time: "10-15 Minutes read",
+      description:
+        "Cooperatives help farmers negotiate better prices by pooling their produce and sharing market information.",
+      author: "Bunmi Alonge",
+      date: "April, 2025",
+      image: assets.cooperativeboast,
+    },
+  ],
+  farm: [
+    {
+      title: "How to Choose the Right Seeds for Your Soil Type in Nigeria",
+      time: "10-15 Minutes read",
+      description:
+        "Choosing the right seeds starts with understanding your soil type—whether it's sandy, loamy, or clay—because each crop grows best in specific conditions.",
+      author: "Adewale Adegoke",
+      date: "January, 2025",
+      image: assets.rightsoil,
+    },
+  ],
+};
+
+export const blogCategories = [
+  { id: "tech", name: "Tech", count: articles.tech.length },
+  { id: "business", name: "Business", count: articles.business.length },
+  { id: "farm", name: "Farm Education", count: articles.farm.length },
+] as const;
+
 export const categories: Category[] = [
   { id: 1, name: "Protein", imageUrl: assets.protein },
   { id: 2, name: "Vegetables", imageUrl: assets.vegetable },

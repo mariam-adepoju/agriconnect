@@ -24,6 +24,11 @@ import courier from "../assets/icons/couriericon.png";
 import dhl from "../assets/icons/dhlicon.png";
 import locationMap from "../assets/images/location-map.jpg";
 import paystack from "../assets/icons/paystack.png";
+import cooperativeboast from "../assets/images/cooperativeboost.jpg";
+import tomatoes from "../assets/images/tomatoes.jpg";
+import smarttrade from "../assets/images/smarttrade.jpg";
+import rightsoil from "../assets/images/rightsoil.jpg";
+import digitaltools from "../assets/images/digitaltools.jpg";
 
 export const assets = {
   avocadoicon,
@@ -52,4 +57,9 @@ export const assets = {
   dhl,
   locationMap,
   paystack,
+  cooperativeboast,
+  tomatoes,
+  smarttrade,
+  rightsoil,
+  digitaltools,
 };

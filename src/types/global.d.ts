@@ -50,3 +50,12 @@ type Order = {
   total: number;
   date: string;
 };
+type BlogCategory = "tech" | "business" | "farm";
+type Article = {
+  title: string;
+  time: string;
+  description: string;
+  author: string;
+  date: string;
+  image: string;
+};

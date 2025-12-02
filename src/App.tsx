@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import CartPage from "./pages/Cart";
 import PaymentPage from "./pages/Payment";
 import MainLayout from "./layout/MainLayout";
+import Farmers from "./pages/Farmers";
+import Blogs from "./pages/Blogs";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           />
           <Route path="/productdetails/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/farmers" element={<Farmers />} />
+          <Route path="/blog" element={<Blogs />} />
         </Route>
         <Route path="/payment" element={<PaymentPage />} />
       </Routes>

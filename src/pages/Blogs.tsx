@@ -97,10 +97,10 @@ const Blogs = () => {
 
                 <CardContent className="px-4 space-y-2 text-[#404040]">
                   <p className="text-sm">{article.time}</p>
-                  <h3 className="font-semibold leading-tight">
+                  <h3 className="font-bold text-lg leading-tight">
                     {article.title}
                   </h3>
-                  <p className="text-sm line-clamp-3">{article.description}</p>
+                  <p className="line-clamp-3">{article.description}</p>
 
                   <div className="flex items-center gap-3 pt-3">
                     <Avatar className="text-[#404040] text-base">
@@ -109,8 +109,8 @@ const Blogs = () => {
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <p className="text-sm font-medium">{article.author}</p>
-                      <p className="text-xs ">{article.date}</p>
+                      <p className="font-semibold">{article.author}</p>
+                      <p className="text-sm ">{article.date}</p>
                     </div>
                   </div>
                 </CardContent>

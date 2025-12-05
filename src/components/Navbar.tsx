@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Button } from "./ui/button";
-import { Menu, ShoppingCart, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ const Navbar = () => {
     { name: "Marketplace", path: "/marketplace" },
     { name: "Farmers", path: "/farmers" },
     { name: "Blog", path: "/blog" },
+    { name: "Cart", path: "/cart" },
   ];
 
   const [isScrolled, setIsScrolled] = useState(false);
@@ -79,18 +80,18 @@ const Navbar = () => {
         {/* Desktop Right */}
         <div className="hidden md:flex items-center gap-4">
           <Button
-            onClick={() => navigate("/cart")}
+            onClick={() => navigate("/signup")}
             variant={"outline"}
             className={cn(
-              "rounded-full px-4! py-3 text-base lg:text-lg flex gap-2 text-greeny"
+              "rounded-full px-4! py-3 text-base lg:text-lg font-semibold text-greeny"
             )}
           >
-            <ShoppingCart />
-            <span>Cart</span>
+            Sign Up
           </Button>
           <Button
+            onClick={() => navigate("/login")}
             className={cn(
-              "bg-secondary text-base lg:text-lg font-bold rounded-full px-4! py-3 hover:bg-secondary/80 transition-opacity duration-300 "
+              "bg-secondary text-base lg:text-lg font-semibold rounded-full px-4! py-3 hover:bg-secondary/80 "
             )}
           >
             Login
@@ -131,17 +132,22 @@ const Navbar = () => {
 
           <Button
             onClick={() => {
-              navigate("/cart");
+              navigate("/signup");
               setIsMenuOpen(false);
             }}
             variant={"outline"}
             className="border text-greeny px-4 py-1 text-sm rounded-full cursor-pointer transition-all"
           >
-            <ShoppingCart />
-            <span>Cart</span>
+            Sign up
           </Button>
 
-          <Button className="text-white cursor-pointer px-8 py-2.5 rounded-full transition-all duration-500">
+          <Button
+            onClick={() => {
+              navigate("/login");
+              setIsMenuOpen(false);
+            }}
+            className="text-white cursor-pointer px-8 py-2.5 rounded-full transition-all duration-500"
+          >
             Login
           </Button>
         </div>

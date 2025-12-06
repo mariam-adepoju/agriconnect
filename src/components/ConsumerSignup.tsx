@@ -62,7 +62,7 @@ export default function ConsumerSignUp({
       });
 
       toast.success("Consumer account created successfully!");
-      navigate("/marketplace");
+      navigate("/");
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);

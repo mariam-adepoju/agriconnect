@@ -49,6 +49,12 @@ type Order = {
   items: CartItem[];
   total: number;
   date: string;
+  userId: string;
+  userName: string;
+  shippingAddress: string;
+  shippingLocation: string;
+  date: string;
+  status: "pending" | "shipped" | "delivered" | "cancelled";
 };
 type BlogCategory = "tech" | "business" | "farm";
 type Article = {

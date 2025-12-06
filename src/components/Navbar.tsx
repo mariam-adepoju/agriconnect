@@ -2,10 +2,13 @@ import { cn } from "@/lib/utils";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { Button } from "./ui/button";
-import { Menu, X } from "lucide-react";
+import { LogOut, Menu, X } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { currentUser, userProfile, isLoading, logout } = useAuthStore();
+
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Marketplace", path: "/marketplace" },
@@ -25,6 +28,8 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const displayName =
+    userProfile?.firstName || currentUser?.email?.split("@")[0] || "User";
   return (
     <div className="overflow-y-scroll">
       <nav
@@ -65,41 +70,60 @@ const Navbar = () => {
               )}
             </NavLink>
           ))}
-          {/* <div className="flex items-center bg-background">
-            <Input
-              type="text"
-              placeholder="Search Produce"
-              className="border-0  focus-visible:ring-0 focus-visible:border-0 rounded-none"
-            />
-            <Button className="rounded-none bg-secondary hover:bg-secondary/80">
-              Search
-            </Button>
-          </div> */}
         </div>
 
         {/* Desktop Right */}
-        <div className="hidden md:flex items-center gap-4">
-          <Button
-            onClick={() => navigate("/signup")}
-            variant={"outline"}
-            className={cn(
-              "rounded-full px-4! py-3 text-base lg:text-lg font-semibold text-greeny"
-            )}
-          >
-            Sign Up
-          </Button>
-          <Button
-            onClick={() => navigate("/login")}
-            className={cn(
-              "bg-secondary text-base lg:text-lg font-semibold rounded-full px-4! py-3 hover:bg-secondary/80 "
-            )}
-          >
-            Login
-          </Button>
+        {/* Desktop Right */}
+        <div className="hidden md:flex items-center gap-6">
+          {isLoading ? (
+            <div className="h-8 w-24 animate-pulse bg-gray-200 rounded-full" />
+          ) : currentUser ? (
+            <div className="flex items-center gap-4">
+              {/* Avatar + Greeting */}
+              <div className="flex items-center gap-3  px-3 py-1.5 ">
+                <div className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">
+                  {displayName.charAt(0).toUpperCase()}
+                </div>
+              </div>
+
+              {/* Logout Button */}
+              <Button
+                onClick={logout}
+                variant="outline"
+                className="rounded-full text-destructive font-semibold px-5 py-2 hover:text-destructive/80 hover:shadow-md transition-all"
+              >
+                <LogOut /> Logout
+              </Button>
+            </div>
+          ) : (
+            <>
+              {/* Sign Up Button */}
+              <Button
+                onClick={() => navigate("/signup")}
+                variant="outline"
+                className="rounded-full border-greeny text-greeny font-semibold px-6 py-2 hover:border-primary hover:text-primary hover:bg-white transition-all"
+              >
+                Sign Up
+              </Button>
+
+              {/* Login Button */}
+              <Button
+                onClick={() => navigate("/login")}
+                className="rounded-full bg-secondary text-grany font-semibold px-6 py-2 hover:bg-secondary/80 hover:shadow-md transition-all"
+              >
+                Login
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex items-center gap-3 md:hidden text-greeny">
+          {currentUser ? (
+            <div className="h-8 w-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold">
+              {displayName.charAt(0).toUpperCase()}
+            </div>
+          ) : null}
           <Menu
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className={`h-6 w-6 cursor-pointer`}
@@ -129,27 +153,38 @@ const Navbar = () => {
               {link.name}
             </a>
           ))}
+          {currentUser ? (
+            <Button
+              onClick={logout}
+              variant="outline"
+              className="rounded-full text-destructive border-destructive font-semibold px-5 py-2 hover:text-destructive/80 hover:shadow-md transition-all"
+            >
+              <LogOut /> Logout
+            </Button>
+          ) : (
+            <>
+              <Button
+                onClick={() => {
+                  navigate("/signup");
+                  setIsMenuOpen(false);
+                }}
+                variant={"outline"}
+                className="border text-greeny px-4 py-1 text-sm rounded-full cursor-pointer transition-all"
+              >
+                Sign up
+              </Button>
 
-          <Button
-            onClick={() => {
-              navigate("/signup");
-              setIsMenuOpen(false);
-            }}
-            variant={"outline"}
-            className="border text-greeny px-4 py-1 text-sm rounded-full cursor-pointer transition-all"
-          >
-            Sign up
-          </Button>
-
-          <Button
-            onClick={() => {
-              navigate("/login");
-              setIsMenuOpen(false);
-            }}
-            className="text-white cursor-pointer px-8 py-2.5 rounded-full transition-all duration-500"
-          >
-            Login
-          </Button>
+              <Button
+                onClick={() => {
+                  navigate("/login");
+                  setIsMenuOpen(false);
+                }}
+                className="text-white cursor-pointer px-8 py-2.5 rounded-full transition-all duration-500"
+              >
+                Login
+              </Button>
+            </>
+          )}
         </div>
       </nav>
     </div>

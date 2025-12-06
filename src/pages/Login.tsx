@@ -45,7 +45,7 @@ export default function Login() {
       toast.success("Login successful!");
 
       if (userRole === "farmer") navigate("/dashboard/farmer");
-      else navigate("/marketplace");
+      else navigate("/");
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);

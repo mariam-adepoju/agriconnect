@@ -11,8 +11,16 @@ import Blogs from "./pages/Blogs";
 import AuthLayout from "./layout/AuthLayout";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import { useEffect } from "react";
+import { useAuthStore } from "./store/useAuthStore";
+import PrivateRouteLayout from "./layout/PrivateRouteLayout";
 
 function App() {
+  const initializeAuth = useAuthStore((state) => state.initializeAuth);
+
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
   return (
     <>
       <ToastContainer />
@@ -33,7 +41,9 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
         </Route>
-        <Route path="/payment" element={<PaymentPage />} />
+        <Route element={<PrivateRouteLayout />}>
+          <Route path="/payment" element={<PaymentPage />} />
+        </Route>
       </Routes>
     </>
   );

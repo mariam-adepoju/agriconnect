@@ -44,7 +44,7 @@ export default function Login() {
 
       toast.success("Login successful!");
 
-      if (userRole === "farmer") navigate("/dashboard/farmer");
+      if (userRole === "farmer") navigate("/farmer-dashboard");
       else navigate("/");
     } catch (error: unknown) {
       const errorMessage =

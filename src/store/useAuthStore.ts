@@ -11,6 +11,7 @@ interface UserProfile {
   location: string;
   address: string;
   email: string;
+  farmName?: string;
 }
 
 interface AuthState {
@@ -23,6 +24,9 @@ interface AuthState {
   logout: () => void;
 }
 
+// Ensure the listener is only attached once
+let isAuthListenerInitialized = false;
+
 export const useAuthStore = create<AuthState>((set) => ({
   currentUser: null,
   userProfile: null,
@@ -30,22 +34,39 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   // 1. Initialize Auth State Listener
   initializeAuth: () => {
+    if (isAuthListenerInitialized) {
+      console.log("[AuthStore] Listener already initialized.");
+      return;
+    }
+    isAuthListenerInitialized = true;
+
+    console.log("[AuthStore] Initializing Firebase Auth Listener...");
+
     onAuthStateChanged(auth, async (user) => {
+      // Step 1: Update current user and mark initial load as complete
       set({ currentUser: user, isLoading: false });
 
       if (user) {
-        // 2. Fetch User Profile from RTDB if logged in
-        const dbRef = ref(rtdb);
-        const snapshot = await get(child(dbRef, `users/${user.uid}`));
+        // Step 2: Fetch User Profile from RTDB if logged in
+        try {
+          const dbRef = ref(rtdb);
+          const snapshot = await get(child(dbRef, `users/${user.uid}`));
 
-        if (snapshot.exists()) {
-          set({ userProfile: snapshot.val() as UserProfile });
-        } else {
-          // Fallback if profile is missing (should not happen after sign-up)
+          if (snapshot.exists()) {
+            set({ userProfile: snapshot.val() as UserProfile });
+            console.log(`[AuthStore] Profile loaded for ${user.uid}`);
+          } else {
+            console.warn(
+              `[AuthStore] Profile missing for UID: ${user.uid}. Clearing profile state.`
+            );
+            set({ userProfile: null });
+          }
+        } catch (error) {
+          console.error("[AuthStore] Failed to fetch user profile:", error);
           set({ userProfile: null });
         }
       } else {
-        // Clear profile data on logout
+        console.log("[AuthStore] No active user. Clearing state.");
         set({ userProfile: null });
       }
     });
@@ -53,9 +74,12 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   // 3. Logout Action
   logout: async () => {
-    await signOut(auth);
+    set({ currentUser: null, userProfile: null });
+    try {
+      await signOut(auth);
+      console.log("[AuthStore] User signed out successfully.");
+    } catch (error) {
+      console.error("[AuthStore] Logout failed:", error);
+    }
   },
 }));
-
-// Run the initialization logic once to start listening for changes
-// Note: This needs to be called somewhere global, like your App component useEffect.

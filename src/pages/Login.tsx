@@ -34,16 +34,11 @@ export default function Login() {
         data.email,
         data.password
       );
-
       const userId = userCredential.user.uid;
-
       const dbRef = ref(rtdb);
       const snapshot = await get(child(dbRef, `users/${userId}`));
-
       const userRole = snapshot.exists() ? snapshot.val().role : "consumer";
-
       toast.success("Login successful!");
-
       if (userRole === "farmer") navigate("/farmer-dashboard");
       else navigate("/");
     } catch (error: unknown) {
@@ -51,7 +46,6 @@ export default function Login() {
         error instanceof Error ? error.message : String(error);
 
       toast.error("Invalid email or password.");
-
       form.setError("email", {
         type: "manual",
         message: "Invalid email or password.",

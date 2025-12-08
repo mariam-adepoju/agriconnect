@@ -29,7 +29,7 @@ const FarmerDashboard = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/login");
+    navigate("/");
   };
   const isProfileLoading = !userProfile;
   const MainContent = isProfileLoading ? (

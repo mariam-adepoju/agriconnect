@@ -54,7 +54,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
           if (snapshot.exists()) {
             set({ userProfile: snapshot.val() as UserProfile });
-            console.log(`[AuthStore] Profile loaded for ${user.uid}`);
+            // console.log(`[AuthStore] Profile loaded for ${user.uid}`);
           } else {
             console.warn(
               `[AuthStore] Profile missing for UID: ${user.uid}. Clearing profile state.`

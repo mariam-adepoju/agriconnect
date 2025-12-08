@@ -71,8 +71,6 @@ const Navbar = () => {
             </NavLink>
           ))}
         </div>
-
-        {/* Desktop Right */}
         {/* Desktop Right */}
         <div className="hidden md:flex items-center gap-6">
           {isLoading ? (

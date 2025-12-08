@@ -14,6 +14,7 @@ import Login from "./pages/Login";
 import { useEffect } from "react";
 import { useAuthStore } from "./store/useAuthStore";
 import PrivateRouteLayout from "./layout/PrivateRouteLayout";
+import FarmerDashboard from "./pages/FarmerDashboard";
 
 function App() {
   const initializeAuth = useAuthStore((state) => state.initializeAuth);
@@ -43,6 +44,7 @@ function App() {
         </Route>
         <Route element={<PrivateRouteLayout />}>
           <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/farmer-dashboard/*" element={<FarmerDashboard />} />
         </Route>
       </Routes>
     </>

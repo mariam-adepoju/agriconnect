@@ -65,7 +65,7 @@ export default function FarmerSignUp({
       });
 
       toast.success("Farmer account created successfully!");
-      navigate("/dashboard/farmer");
+      navigate("/farmer-dashboard");
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);

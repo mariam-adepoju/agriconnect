@@ -49,9 +49,7 @@ const CartPage = () => {
       <p className="capitalize">{userProfile.location}</p>
     </>
   ) : (
-    <p className="text-destructive">
-      Error: Address not found. Please log in again.
-    </p>
+    <p className="text-destructive">Address not found. Please log in.</p>
   );
 
   return (
@@ -75,7 +73,7 @@ const CartPage = () => {
                 <img
                   src={item.imageUrl}
                   alt={item.name}
-                  className="w-25 h-25 object-cover rounded-lg border"
+                  className="w-30 h-30 object-contain rounded-lg border"
                 />
 
                 {/* Item Content */}
@@ -135,26 +133,21 @@ const CartPage = () => {
           <Card className="p-5 text-[#404040]">
             <h3 className="font-semibold text-xl">Your Order</h3>
             <Separator className="my-2" />
-
             <div className="flex justify-between mb-1">
               <span>
                 Subtotal ({items.reduce((t, i) => t + i.qty, 0)} items)
               </span>
               <span>₦{subtotal.toLocaleString()}</span>
             </div>
-
             <div className="flex justify-between mb-1">
               <span>Delivery Fee</span>
               <span>₦{deliveryFee.toLocaleString()}</span>
             </div>
-
             <div className="flex justify-between mb-1">
               <span>Tax</span>
               <span>₦{tax.toLocaleString()}</span>
             </div>
-
             <Separator className="my-2" />
-
             <div className="flex justify-between font-semibold mb-4">
               <span>Total Amount</span>
               <span>₦{total.toLocaleString()}</span>

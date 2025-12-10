@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { ref, get, child } from "firebase/database";
 import { auth, rtdb } from "../firebase";
-import { useNavigate, Link } from "react-router";
+import { useNavigate, Link, useLocation } from "react-router";
 import { FieldGroup } from "@/components/ui/field";
 import { FormField } from "@/components/FormField";
 import { toast } from "react-toastify";
@@ -14,6 +14,9 @@ import { Card } from "@/components/ui/card";
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const redirectTo = location.state?.redirectTo;
+  const paymentData = location.state?.paymentData;
 
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -39,8 +42,18 @@ export default function Login() {
       const snapshot = await get(child(dbRef, `users/${userId}`));
       const userRole = snapshot.exists() ? snapshot.val().role : "consumer";
       toast.success("Login successful!");
-      if (userRole === "farmer") navigate("/farmer-dashboard");
-      else navigate("/");
+      if (userRole === "farmer") {
+        navigate("/farmer-dashboard");
+      } else {
+        if (redirectTo) {
+          navigate(redirectTo, {
+            replace: true,
+            state: paymentData || null,
+          });
+        } else {
+          navigate("/");
+        }
+      }
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);

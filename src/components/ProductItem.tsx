@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { useCartStore } from "@/store/useCartStore";
+import { Button } from "./ui/button";
 
 interface ProductCardProps {
   product: Product;
@@ -27,23 +28,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <img
           src={product.imageUrl}
           alt={product.name}
-          className="w-30 h-30 object-contain mx-auto"
+          className="w-40 h-30 object-contain mx-auto"
         />
-
-        <h3 className="text-sm font-semibold">{product.name}</h3>
-
-        <div className="flex justify-between items-center mt-2">
-          <span className="font-semibold">
+        <div className="text-[#404040] mt-2 space-y-1">
+          <h3 className="font-medium text-sm">{product.name}</h3>
+          <p className="text-sm font-semibold">
             ₦{product.price.toLocaleString()}
-          </span>
+          </p>
         </div>
-
-        <button
-          onClick={handleAddToCart}
-          className="mt-4 w-full bg-primary text-white py-2 rounded-md"
-        >
+        <Button onClick={handleAddToCart} className="mt-2 text-base w-full ">
           Add to cart
-        </button>
+        </Button>
       </article>
     </Link>
   );

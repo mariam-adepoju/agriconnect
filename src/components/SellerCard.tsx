@@ -20,7 +20,7 @@ const SellerCard: React.FC<SellerCardProps> = ({
         <img
           src={avatar}
           alt={name}
-          className="w-30 h-30 rounded-full object-cover border border-gray-100"
+          className="w-40 h-40 rounded-full object-cover border border-gray-100"
         />
         <div className="space-y-2">
           <h4 className="text-lg font-semibold text-[#404040] tracking-wide mb-1">

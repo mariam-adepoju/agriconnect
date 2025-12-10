@@ -3,9 +3,10 @@ import { Link, useParams, useNavigate } from "react-router";
 import { products } from "@/lib/mockData";
 import SellerCard from "../components/SellerCard";
 import QuantityPicker from "../components/QuantityPicker";
-import { MapPin, Star } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { toast } from "react-toastify";
 import { useCartStore } from "@/store/useCartStore";
+import StarRating from "@/components/StarRating";
 
 const ProduceDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -90,20 +91,18 @@ const ProduceDetail: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            {cartItem ? (
-              <QuantityPicker itemId={cartItem.id} />
-            ) : (
-              <QuantityPicker itemId={product.id} />
-            )}
+            <QuantityPicker itemId={product.id} product={product} />
             <button
               onClick={() => {
-                addToCart({
-                  id: product.id,
-                  name: product.name,
-                  price: product.price,
-                  imageUrl: product.imageUrl,
-                  qty: 1,
-                });
+                if (!cartItem) {
+                  addToCart({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    imageUrl: product.imageUrl,
+                    qty: 1,
+                  });
+                }
                 navigate("/cart");
               }}
               className="bg-secondary hover:bg-secondary/80 text-grany text-xl py-2 px-4 rounded-md shadow-sm transition-colors"
@@ -116,11 +115,7 @@ const ProduceDetail: React.FC = () => {
           <div>
             <h3 className="font-semibold text-[#404040] mb-1">Description</h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Pawpaw (also known as papaya) is a sweet, soft tropical fruit with
-              orange flesh and a buttery texture. It is rich in vitamins A and
-              C, supports digestion, and is great for fresh eating, juicing,
-              salads, or smoothies. Freshly harvested and naturally ripened for
-              full flavor.
+              {product.description}
             </p>
           </div>
 
@@ -137,19 +132,19 @@ const ProduceDetail: React.FC = () => {
           {/* Reviews */}
           <div>
             <h3 className="font-semibold text-[#404040] mb-1">Reviews</h3>
-            <div className="space-y-1">
-              <div className="bg-white p-3 rounded-lg border border-gray-100">
-                <div className="flex text-[#ffca28] mb-1">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <Star key={i} size={20} fill="currentColor" />
-                  ))}
+            {product.reviews.map((review, index) => (
+              <div key={index} className="space-y-1">
+                <div className="bg-white p-3 rounded-lg border border-gray-100">
+                  <div className="flex gap-1 mb-2 text-[#ffca28]">
+                    <StarRating rating={review.rating} />
+                  </div>
+                  <p className=" font-bold text-[#404040]">
+                    {review.reviewerName}
+                  </p>
+                  <p className=" text-[#404040]">{review.description}</p>
                 </div>
-                <p className=" font-bold text-[#404040]">Opeoluwa</p>
-                <p className=" text-[#404040]">
-                  The Pawpaw was fresh and tasty! Will order again.
-                </p>
               </div>
-            </div>
+            ))}
           </div>
 
           {/* Map */}

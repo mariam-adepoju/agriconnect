@@ -9,6 +9,11 @@ interface Seller {
   location: string;
   avatar: string;
 }
+interface Review {
+  reviewerName: string;
+  rating: number;
+  description: string;
+}
 interface Product {
   id: number;
   name: string;
@@ -19,6 +24,8 @@ interface Product {
   location: string;
   sellerType: string;
   seller: Seller;
+  reviews: Review[];
+  description: string;
 }
 interface ActiveFilters {
   produceType: string | null;

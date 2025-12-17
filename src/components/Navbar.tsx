@@ -31,7 +31,7 @@ const Navbar = () => {
   const displayName =
     userProfile?.firstName || currentUser?.email?.split("@")[0] || "User";
   return (
-    <div className="overflow-y-scroll">
+    <div className="overflow-y-scroll z-50">
       <nav
         className={`fixed top-0 left-0 bg-transparent w-full flex items-center justify-between px-4 md:px-16 lg:px-24 xl:px-32 transition-all duration-500 z-50 ${
           isScrolled ? "bg-white shadow-md py-3 md:py-4" : "py-4 md:py-6"

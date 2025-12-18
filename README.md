@@ -1,75 +1,55 @@
-# React + TypeScript + Vite
+# 🌾 AgricConnect
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**AgricConnect** is a modern e-commerce platform that connects **farmers directly with consumers**, enabling seamless agricultural product sales while reducing middlemen and improving access to fresh produce at best price.
 
-Currently, two official plugins are available:
+🔗 **Live Demo:** https://agricconect.netlify.app/  
+🔗 **Repository:** https://github.com/mariam-adepoju/agriconnect
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📌 Overview
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+AgricConnect bridges the gap between farmers and buyers by providing a user-friendly marketplace where agricultural products can be listed, discovered, and purchased securely. The platform focuses on accessibility, real-time updates, and a smooth checkout experience.
 
-Note: This will impact Vite dev & build performances.
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 🛒 Browse and purchase agricultural products directly from source  
+- 🔐 Firebase-powered authentication and user sessions  
+- 💳 Integrated Paystack (test mode) for secure payment processing.
+- 🔄 Real-time product and cart updates  
+- 📱 Fully mobile-responsive design built with Tailwind CSS and Shadcn UI. 
+- ⚡ Optimized state management with Zustand  
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🛠️ Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Frontend**
+- React  
+- TypeScript  
+- Tailwind CSS
+- Shadcn ui
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+**State Management**
+- Zustand  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Services**
+- Firebase (Authentication & Firestore)  
+- Paystack (testmode-Payments)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Deployment**
+- Netlify
+
+---
+## 🚀 Key Achievements & Problem Solving
+- **Data Integrity:** Implemented Firebase Firestore to handle real-time inventory updates, minimizing inconsistencies in product availability.  
+- **Scalable Architecture:** Used TypeScript to enforce type safety across cart logic, checkout flow, and payment handling.  
+- **UI Precision:** Translated product and UX requirements into a clean, responsive, and accessible interface using Tailwind CSS.  
+
+
+## ⚠️ Note on Local Setup
+To protect sensitive information, the .env file containing Firebase and Paystack API keys has been excluded from this repository.
+To view the application in action, please visit the Live Demo.
+

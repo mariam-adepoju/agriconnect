@@ -34,7 +34,7 @@ const PaystackPop: Paystack | undefined = (
 ).PaystackPop;
 
 const PaymentPage: React.FC = () => {
-  const { items, clearCart, addOrder } = useCartStore();
+  const { items, clearCart } = useCartStore();
   const { currentUser, userProfile, isLoading: isAuthLoading } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
@@ -79,23 +79,23 @@ const PaymentPage: React.FC = () => {
       callback: (response: PaystackResponse) => {
         setLoading(false);
         if (response.status === "success") {
-          const order = {
-            id: response.reference || "order-" + Date.now(),
-            items: [...items],
-            subtotal,
-            deliveryFee,
-            tax,
-            total,
-            date: new Date().toISOString(),
-            status: "pending",
-            userId: currentUser.uid,
-            userName: userFullName,
-            shippingAddress: userProfile.address,
-            shippingLocation: userProfile.location,
-          };
-          addOrder(order as Order);
+          // const order = {
+          //   id: response.reference || "order-" + Date.now(),
+          //   items: [...items],
+          //   subtotal,
+          //   deliveryFee,
+          //   tax,
+          //   total,
+          //   date: new Date().toISOString(),
+          //   status: "pending",
+          //   userId: currentUser.uid,
+          //   userName: userFullName,
+          //   shippingAddress: userProfile.address,
+          //   shippingLocation: userProfile.location,
+          // };
           clearCart();
-          navigate(`/order/${order.id}`);
+          navigate("/cart");
+          // navigate(`/order/${order.id}`);
         } else {
           setShowFailed(true);
         }

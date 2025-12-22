@@ -72,3 +72,12 @@ type Article = {
   date: string;
   image: string;
 };
+interface UserProfile {
+  role: "consumer" | "farmer";
+  firstName: string;
+  lastName: string;
+  location: string;
+  address: string;
+  email: string;
+  farmName?: string;
+}

@@ -29,7 +29,7 @@ const FarmersTestimonial: React.FC = () => {
             <img
               src={review.image}
               alt="customer image"
-              className="w-20 md:w-30 h-40 bg-cover rounded-3xl aspect-video absolute left-0  top-1/2  transform -translate-x-1/2 -translate-y-1/2"
+              className="w-20 h-30 md:w-30 md:h-40 bg-cover rounded-2xl aspect-video absolute left-0  top-1/2  transform -translate-x-1/2 -translate-y-1/2"
             />
             <p className="mb-4 text-xl md:text-2xl text-[#1e1e1e] italic">
               “{review.text}”

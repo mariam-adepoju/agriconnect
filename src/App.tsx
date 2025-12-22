@@ -18,10 +18,14 @@ import FarmerDashboard from "./pages/FarmerDashboard";
 
 function App() {
   const initializeAuth = useAuthStore((state) => state.initializeAuth);
-
+  const isLoading = useAuthStore((state) => state.isLoading);
   useEffect(() => {
     initializeAuth();
   }, [initializeAuth]);
+
+  if (isLoading) {
+    return null;
+  }
   return (
     <>
       <ToastContainer />

@@ -1,104 +1,101 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { useAuthStore } from "./useAuthStore";
-
-interface OrderTotals {
-  subtotal: number;
-  deliveryFee: number;
-  tax: number;
-  total: number;
-}
+import { auth } from "@/firebase";
+import {
+  loadCartFromDB,
+  saveCartToDB,
+  clearCartInDB,
+} from "@/services/cartservice";
 
 interface CartState {
   items: CartItem[];
-  orderHistory: Order[];
-  addToCart: (item: CartItem) => void;
-  removeItem: (id: number) => void;
-  increaseQty: (id: number) => void;
-  decreaseQty: (id: number) => void;
-  clearCart: () => void;
-  addOrder: (order: Order) => void;
+  isSyncing: boolean;
+
+  loadFirebaseCart: () => Promise<void>;
+  addToCart: (item: CartItem) => Promise<void>;
+  removeItem: (id: number) => Promise<void>;
+  increaseQty: (id: number) => Promise<void>;
+  decreaseQty: (id: number) => Promise<void>;
+  clearCart: () => Promise<void>;
 }
 
 export const useCartStore = create<CartState>()(
   persist(
     (set, get) => ({
       items: [],
-      orderHistory: [],
+      isSyncing: false,
 
-      addToCart: (item) => {
-        const existing = get().items.find((i) => i.id === item.id);
-        if (existing) {
-          set({
-            items: get().items.map((i) =>
-              i.id === item.id ? { ...i, qty: i.qty + item.qty } : i
-            ),
-          });
-        } else {
-          set({ items: [...get().items, item] });
+      /** Firebase cart load (only when logged in) */
+      loadFirebaseCart: async () => {
+        const user = auth.currentUser;
+        if (!user) return;
+
+        set({ isSyncing: true });
+        try {
+          const firebaseItems = await loadCartFromDB(user.uid);
+          set({ items: firebaseItems });
+          console.log("[CartStore] Firebase cart loaded");
+        } catch (error) {
+          console.error("[CartStore] Firebase load failed", error);
+        } finally {
+          set({ isSyncing: false });
         }
       },
 
-      removeItem: (id) =>
-        set({ items: get().items.filter((item) => item.id !== id) }),
+      addToCart: async (item) => {
+        const items = get().items;
+        const existing = items.find((i) => i.id === item.id);
 
-      increaseQty: (id) =>
-        set({
-          items: get().items.map((i) =>
-            i.id === id ? { ...i, qty: i.qty + 1 } : i
-          ),
-        }),
+        const updated = existing
+          ? items.map((i) =>
+              i.id === item.id ? { ...i, qty: i.qty + item.qty } : i
+            )
+          : [...items, item];
 
-      decreaseQty: (id) =>
-        set({
-          items: get().items.map((i) =>
-            i.id === id ? { ...i, qty: Math.max(1, i.qty - 1) } : i
-          ),
-        }),
+        set({ items: updated });
 
-      clearCart: () => set({ items: [] }),
-      addOrder: (order) =>
-        set({ orderHistory: [...get().orderHistory, order] }),
+        const user = auth.currentUser;
+        if (user) await saveCartToDB(user.uid, updated);
+      },
+
+      removeItem: async (id) => {
+        const updated = get().items.filter((i) => i.id !== id);
+        set({ items: updated });
+
+        const user = auth.currentUser;
+        if (user) await saveCartToDB(user.uid, updated);
+      },
+
+      increaseQty: async (id) => {
+        const updated = get().items.map((i) =>
+          i.id === id ? { ...i, qty: i.qty + 1 } : i
+        );
+        set({ items: updated });
+
+        const user = auth.currentUser;
+        if (user) await saveCartToDB(user.uid, updated);
+      },
+
+      decreaseQty: async (id) => {
+        const updated = get().items.map((i) =>
+          i.id === id ? { ...i, qty: Math.max(1, i.qty - 1) } : i
+        );
+        set({ items: updated });
+
+        const user = auth.currentUser;
+        if (user) await saveCartToDB(user.uid, updated);
+      },
+
+      clearCart: async () => {
+        set({ items: [] });
+
+        const user = auth.currentUser;
+        if (user) await clearCartInDB(user.uid);
+      },
     }),
-
-    { name: "cart-storage" }
+    {
+      name: "guest-cart",
+      partialize: (state) => ({ items: state.items }),
+    }
   )
 );
-export const placeOrder = (totals: OrderTotals) => {
-  const { items, addOrder, clearCart } = useCartStore.getState();
-  const { currentUser, userProfile } = useAuthStore.getState();
-
-  // Safety checks
-  if (!currentUser || !userProfile) {
-    console.error(
-      "Order placement failed: User not authenticated or profile missing."
-    );
-    return;
-  }
-  if (items.length === 0) {
-    console.warn("Order placement failed: Cart is empty.");
-    return;
-  }
-
-  // 1. Construct the complete Order object
-  const newOrder: Order = {
-    id: `ORDER-${Date.now()}`,
-    items: items,
-    ...totals,
-
-    // Add User Profile Data
-    userId: currentUser.uid,
-    userName: `${userProfile.firstName} ${userProfile.lastName}`,
-    shippingAddress: userProfile.address,
-    shippingLocation: userProfile.location,
-
-    date: new Date().toISOString(),
-    status: "pending",
-  };
-
-  addOrder(newOrder);
-  clearCart();
-
-  console.log(`Order placed successfully: ${newOrder.id}`);
-  return newOrder.id;
-};

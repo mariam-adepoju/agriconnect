@@ -34,7 +34,7 @@ const PaystackPop: Paystack | undefined = (
 ).PaystackPop;
 
 const PaymentPage: React.FC = () => {
-  const { items, clearCart, addOrder } = useCartStore();
+  const { items, clearCart } = useCartStore();
   const { currentUser, userProfile, isLoading: isAuthLoading } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
@@ -93,9 +93,9 @@ const PaymentPage: React.FC = () => {
             shippingAddress: userProfile.address,
             shippingLocation: userProfile.location,
           };
-          addOrder(order as Order);
           clearCart();
-          navigate(`/order/${order.id}`);
+          navigate("/cart");
+          // navigate(`/order/${order.id}`);
         } else {
           setShowFailed(true);
         }

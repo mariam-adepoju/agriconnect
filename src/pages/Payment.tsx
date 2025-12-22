@@ -79,20 +79,20 @@ const PaymentPage: React.FC = () => {
       callback: (response: PaystackResponse) => {
         setLoading(false);
         if (response.status === "success") {
-          const order = {
-            id: response.reference || "order-" + Date.now(),
-            items: [...items],
-            subtotal,
-            deliveryFee,
-            tax,
-            total,
-            date: new Date().toISOString(),
-            status: "pending",
-            userId: currentUser.uid,
-            userName: userFullName,
-            shippingAddress: userProfile.address,
-            shippingLocation: userProfile.location,
-          };
+          // const order = {
+          //   id: response.reference || "order-" + Date.now(),
+          //   items: [...items],
+          //   subtotal,
+          //   deliveryFee,
+          //   tax,
+          //   total,
+          //   date: new Date().toISOString(),
+          //   status: "pending",
+          //   userId: currentUser.uid,
+          //   userName: userFullName,
+          //   shippingAddress: userProfile.address,
+          //   shippingLocation: userProfile.location,
+          // };
           clearCart();
           navigate("/cart");
           // navigate(`/order/${order.id}`);

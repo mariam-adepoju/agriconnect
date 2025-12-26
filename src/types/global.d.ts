@@ -54,10 +54,14 @@ type CartItem = {
 type Order = {
   id: string;
   items: CartItem[];
+  subtotal: number;
+  deliveryFee: number;
+  tax: number;
   total: number;
   date: string;
   userId: string;
   userName: string;
+  email: string;
   shippingAddress: string;
   shippingLocation: string;
   date: string;

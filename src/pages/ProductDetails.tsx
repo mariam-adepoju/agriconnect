@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { useCartStore } from "@/store/useCartStore";
 import StarRating from "@/components/StarRating";
 
-const ProduceDetail: React.FC = () => {
+const ProduceDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const addToCart = useCartStore((state) => state.addToCart);
@@ -62,11 +62,10 @@ const ProduceDetail: React.FC = () => {
                 <div
                   key={idx}
                   onClick={() => setSelectedImage(img)}
-                  className={`bg-white border rounded-lg p-2 h-auto lg:h-50 flex items-center justify-center cursor-pointer transition-all ${
-                    selectedImage === img
+                  className={`bg-white border rounded-lg p-2 h-auto lg:h-50 flex items-center justify-center cursor-pointer transition-all ${selectedImage === img
                       ? "border-secondary border"
                       : "border-gray-200 hover:border-secondary/80"
-                  }`}
+                    }`}
                 >
                   <img
                     src={img}
@@ -190,4 +189,4 @@ const ProduceDetail: React.FC = () => {
   );
 };
 
-export default ProduceDetail;
+export default ProduceDetails;

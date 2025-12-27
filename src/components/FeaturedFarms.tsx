@@ -14,6 +14,7 @@ export function FeaturedFarms() {
             <img
               src={farm.avatar}
               alt={farm.name}
+              loading="lazy"
               className="h-40 w-full object-cover rounded-xl"
             />
             <p className="font-medium text-[#404040] pt-1">{farm.name}</p>

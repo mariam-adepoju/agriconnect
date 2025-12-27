@@ -44,7 +44,7 @@ const Marketplace = () => {
   const visible = filtered.slice((page - 1) * perPage, page * perPage);
 
   return (
-    <div className="py-15 bg-grany ">
+    <div className="py-15 bg-grany">
       <main className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-12 gap-6">
         <FilterBar
           activeCategory={activeCategory}

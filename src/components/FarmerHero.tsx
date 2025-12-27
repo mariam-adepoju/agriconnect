@@ -1,14 +1,22 @@
 import { useNavigate } from "react-router";
 import { Button } from "./ui/button";
 import FarmerFeatures from "./FarmerFeatures";
+import { assets } from "@/assets/asset";
 const FarmerHero = () => {
   const navigate = useNavigate();
   return (
     <section
       className="relative min-h-dvh flex flex-col justify-center bg-cover bg-center"
-      style={{ backgroundImage: "url('/assests/farmerHero.jpg')" }}
     >
-      <div className="absolute inset-0 bg-black/10" />
+      <img
+        src={assets.farmhero}
+        alt="Farmer working in a field"
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+        fetchPriority="high"
+        loading="eager"
+        sizes="100vw"
+      />
+      <div className="absolute inset-0 bg-black/10 -z-10" />
       <div className="px-4 md:px-16 lg:px-24 xl:px-32 z-10">
         <div className="relative text-center text-white">
           <h1 className="md:text-[40px] lg:text-5xl text-3xl font-cabin mt-20 mb-2 font-bold">

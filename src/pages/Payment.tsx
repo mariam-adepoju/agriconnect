@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import PaymentFailedModal from "@/components/PaymentFailedModal";
 import { useAuthStore } from "@/store/useAuthStore";
+import { createOrder } from "@/services/orderService";
 
 type PaystackSetupOptions = {
   key: string;
@@ -57,16 +58,17 @@ const PaymentPage: React.FC = () => {
   const userFullName = `${userProfile.firstName} ${userProfile.lastName}`;
   const { subtotal, deliveryFee, tax, total } = paymentData;
   const PAYSTACK_PUBLIC_KEY: string = import.meta.env.VITE_PAYSTACK_PUBLIC_KEY;
-
   const handlePaystackPayment = () => {
     if (!PAYSTACK_PUBLIC_KEY || !PaystackPop) {
       toast.error("Paystack library not loaded");
       return;
     }
+
     if (!userEmail) {
       toast.error("User email is missing for payment processing.");
       return;
     }
+
     setLoading(true);
 
     const handler = PaystackPop.setup({
@@ -74,31 +76,46 @@ const PaymentPage: React.FC = () => {
       email: userEmail,
       amount: Math.round(total * 100),
       currency: "NGN",
-      ref: "agric-order-" + Date.now(),
+      ref: `agric-order-${Date.now()}`,
 
       callback: (response: PaystackResponse) => {
         setLoading(false);
-        if (response.status === "success") {
-          // const order = {
-          //   id: response.reference || "order-" + Date.now(),
-          //   items: [...items],
-          //   subtotal,
-          //   deliveryFee,
-          //   tax,
-          //   total,
-          //   date: new Date().toISOString(),
-          //   status: "pending",
-          //   userId: currentUser.uid,
-          //   userName: userFullName,
-          //   shippingAddress: userProfile.address,
-          //   shippingLocation: userProfile.location,
-          // };
-          clearCart();
-          navigate("/cart");
-          // navigate(`/order/${order.id}`);
-        } else {
+
+        if (response.status !== "success") {
           setShowFailed(true);
+          return;
         }
+
+        // Wrap async logic
+        (async () => {
+          try {
+            const order: Order = {
+              id: response.reference ?? `order-${Date.now()}`,
+              items: [...items],
+              subtotal,
+              deliveryFee,
+              tax,
+              total,
+              date: new Date().toISOString(),
+              status: "pending",
+              userId: currentUser.uid,
+              userName: userFullName,
+              email: userEmail,
+              shippingAddress: userProfile.address,
+              shippingLocation: userProfile.location,
+            };
+
+            const orderId = await createOrder(currentUser.uid, order);
+            await clearCart();
+            toast.success("Payment successful!");
+            navigate("/orders", {
+              state: { recentOrderId: orderId },
+            });
+          } catch (error) {
+            console.error("Order creation failed:", error);
+            toast.error("Order processing failed. Please contact support.");
+          }
+        })();
       },
       onClose: () => {
         setLoading(false);

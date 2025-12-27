@@ -2,9 +2,18 @@ import { assets } from "../assets/asset";
 const Hero = () => {
   return (
     <section
-      className="relative min-h-dvh flex flex-col justify-center bg-cover bg-center"
-      style={{ backgroundImage: "url('/assests/hero.jpg')" }}
+      className="relative min-h-dvh flex flex-col justify-center overflow-hidden"
     >
+      <img
+        src={assets.hero}
+        alt="Agricconnect Hero"
+        sizes="100vw"
+        className="absolute inset-0 w-full h-full object-cover -z-10"
+        loading="eager"
+        fetchPriority="high"
+      />
+      {/* Optional: Dark Overlay to make text pop */}
+      <div className="absolute inset-0 bg-white/10 -z-10" />
       <div className="px-4 md:px-16 lg:px-24 xl:px-32 space-y-6">
         <h1 className="font-cabin font-bold lg:text-5xl md:text-4xl sm:text-3xl text-2xl max-w-sm md:max-w-md xl:max-w-xl text-greeny/80">
           Bridging The Gap Between Farmers and Consumers. Fresh, Fair and

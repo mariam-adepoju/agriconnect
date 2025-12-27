@@ -1,3 +1,5 @@
+import hero from "../assets/images/hero.png";
+import farmhero from "../assets/images/farmerHero.png";
 import avocadoicon from "../assets/icons/avocadoicon.svg";
 import farmericon from "../assets/icons/farmericon.svg";
 import locationicon from "../assets/icons/locationicon.svg";
@@ -64,6 +66,8 @@ import aisha from "../assets/images/Aisha.jpg";
 import kunle from "../assets/images/kunle.jpg";
 
 export const assets = {
+  hero,
+  farmhero,
   avocadoicon,
   farmericon,
   locationicon,

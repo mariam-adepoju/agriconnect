@@ -61,7 +61,7 @@ function FilterBar({
       {/* Sidebar panel */}
       <aside
         className={`bg-[linear-gradient(90deg,#2D7C31_1.9%,#9CCC65_100%)] text-white rounded-lg p-6
-          md:col-span-3 md:block fixed md:relative top-0 left-0 z-50 h-full md:h-auto w-50 md:w-auto
+          md:col-span-3 md:block fixed md:relative top-0 left-0 z-50 md:z-20 h-full md:h-auto w-50 md:w-auto
           transform transition-transform ${open ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
       >
         {/* Close button for mobile */}

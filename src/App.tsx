@@ -9,13 +9,13 @@ import Login from "./pages/Login";
 import React, { Suspense, useEffect } from "react";
 import { useAuthStore } from "./store/useAuthStore";
 import PrivateRouteLayout from "./layout/PrivateRouteLayout";
-import { Loader } from "lucide-react";
 import CartPage from "./pages/Cart";
 import Blogs from "./pages/Blogs";
 import PaymentPage from "./pages/Payment";
 import FarmerDashboard from "./pages/FarmerDashboard";
 import OrderDetails from "./pages/OrderDetails";
 import ProduceDetails from "./pages/ProductDetails";
+import AppLoader from "./components/AppLoader";
 const Marketplace = React.lazy(() => import("./pages/Marketplace"));
 const Orders = React.lazy(() => import("./pages/OrderHistory"));
 
@@ -33,7 +33,7 @@ function App() {
   return (
     <>
       <ToastContainer />
-      <Suspense fallback={<Loader />}>
+      <Suspense fallback={<AppLoader />}>
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<Home />} />

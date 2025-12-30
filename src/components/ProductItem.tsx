@@ -32,7 +32,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           alt={product.name}
           effect="blur"
           threshold={300}
-          wrapperClassName="w-40 h-30 mx-auto block"
+          wrapperClassName="w-30 h-25 sm:w-40 sm:h-30 mx-auto"
           className="w-full h-full object-contain mx-auto"
         />
         <div className="text-[#404040] mt-2 space-y-1">
